@@ -4,6 +4,23 @@ import { motion } from 'framer-motion';
 
 export default function Home() {
   const [isHovered, setIsHovered] = useState(false);
+  const [tokenData,setTokenData] = useState({
+    name: "",
+    ticker: "",
+    decimals: "",
+    totalSupply: ""
+  });
+  const [deploy,setDeploy] = useState(false)
+   const handleTokenData = (e:any) => {
+    const {name,value}=e.target;
+    setTokenData({
+     ...tokenData,
+      [name]: value
+    })
+  }
+  const deployToken=(e:any)=>{
+    console.log(tokenData);
+  }
 
   return (
     <>
@@ -40,6 +57,9 @@ export default function Home() {
               <input
                 type="text"
                 id="token_name"
+                name="name"
+                value={tokenData.name}
+                onChange={handleTokenData}
                 className="bg-[#101624] text-[1rem] mb-[1.875rem] h-[3.25rem] py-[12px] px-[20px] border border-[#232935] text-[#a9adb8]  placeholder-[#a9adb8] text-sm rounded-[7px]  focus:border-white  block w-full p-2.5 dark:bg-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 transition-all duration-400 ease"
                 placeholder="Enter Token Name"
                 required
@@ -47,6 +67,9 @@ export default function Home() {
               <input
                 type="text"
                 id="ticker"
+                name="ticker"
+                value={tokenData.ticker}
+                onChange={handleTokenData}
                 className="bg-[#101624] text-[1rem] mb-[1.875rem] h-[3.25rem] py-[12px] px-[20px] border border-[#232935] text-[#a9adb8]  placeholder-[#a9adb8] text-sm rounded-[7px]  focus:border-white  block w-full p-2.5 dark:bg-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 transition-all duration-400 ease"
                 placeholder="Ticker"
                 required
@@ -62,6 +85,9 @@ export default function Home() {
               <input
                 type="text"
                 id="decimal"
+                name="decimals"
+                value={tokenData.decimals}
+                onChange={handleTokenData}
                 className="bg-[#101624] text-[1rem] mb-[1.875rem] h-[3.25rem] py-[12px]  px-[20px] border border-[#232935] text-[#a9adb8]  placeholder-[#a9adb8] text-sm rounded-[7px]  focus:border-white  block w-full p-2.5 dark:bg-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 transition-all duration-400 ease"
                 placeholder="Enter Token Decimal"
                 required
@@ -69,6 +95,9 @@ export default function Home() {
               <input
                 type="text"
                 id="total_supply"
+                name="totalSupply"
+                value={tokenData.totalSupply}
+                onChange={handleTokenData}
                 className="bg-[#101624] text-[1rem] mb-[1.875rem] h-[3.25rem] py-[12px] px-[20px] border border-[#232935] text-[#a9adb8]  placeholder-[#a9adb8] text-sm rounded-[7px]  focus:border-white  block w-full p-2.5 dark:bg-gray-700 dark:focus:ring-blue-500 dark:focus:border-blue-500 transition-all duration-400 ease"
                 placeholder="Enter Token Total supply"
                 required
@@ -79,9 +108,10 @@ export default function Home() {
               className={`bg-yellow-400 text-black text-[1rem] py-[8px] px-[1.8rem] rounded-full ${isHovered ? 'shadow-lg' : ''}`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={deployToken}
               transition={{ duration: 0.2 }}
             >
-              Generate Meme Coin
+              Deploy Meme Coin
             </motion.button>
 
           </div>
